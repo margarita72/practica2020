@@ -1,117 +1,206 @@
 import 'package:flutter/material.dart';
+import 'package:mobilepr2020/Animation/FadeAnimation.dart';
+import 'package:mobilepr2020/customization.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    ));
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class HomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  _HomePageState createState() => _HomePageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class _HomePageState extends State<HomePage> {
+  final List<List<String>> products = [
+    [
+      'assets/images/my1.jpg',
+      'Анкета №1',
+      '100 \$',
+      'Уровень индивидуального здоровья и факторов риска развития хронических неинфекционных болезней',
+    ],
+    [
+      'assets/images/my4.jpg',
+      'Анкета №2',
+      '120 \$',
+      'Уровень тревожности',
+    ],
+    [
+      'assets/images/my3.jpg',
+      'Анкета №3',
+      '80 \$',
+      'Опросник SF-36 «Качество жизни»',
+    ],
+  ];
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+  int currentIndex = 0;
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  void _next() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      if (currentIndex < products.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = currentIndex;
+      }
+    });
+  }
+
+  void _preve() {
+    setState(() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = 0;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Container(
+        color: Colors.white,
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            GestureDetector(
+              onHorizontalDragEnd: (DragEndDetails details) {
+                if (details.velocity.pixelsPerSecond.dx > 0) {
+                  _preve();
+                } else if (details.velocity.pixelsPerSecond.dx < 0) {
+                  _next();
+                }
+              },
+              child: FadeAnimation(
+                  .8,
+                  Container(
+                    width: double.infinity,
+                    height: 550,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(products[currentIndex][0]),
+                            fit: BoxFit.cover)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomRight,
+                              colors: [
+                            Colors.grey[700].withOpacity(.9),
+                            Colors.grey.withOpacity(.0),
+                          ])),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          FadeAnimation(
+                              1,
+                              Container(
+                                width: 90,
+                                margin: EdgeInsets.only(bottom: 60),
+                                child: Row(
+                                  children: _buildIndicator(),
+                                ),
+                              ))
+                        ],
+                      ),
+                    ),
+                  )),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Expanded(
+              child: Transform.translate(
+                offset: Offset(0, -40),
+                child: FadeAnimation(
+                    1,
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(30),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          FadeAnimation(
+                              1.3,
+                              Text(
+                                products[currentIndex][1],
+                                style: TextStyle(
+                                    //color: Colors.grey[800],
+                                    color: myColor,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          SizedBox(
+                            height: 15,
+                          ),
+
+                          //название анкеты
+                          FadeAnimation(
+                              1.4,
+                              Text(
+                                products[currentIndex][3],
+                                style: TextStyle(
+                                    //color: Color(0xFF33CC99),
+                                    //fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              )),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: FadeAnimation(
+                                  1.7,
+                                  Container(
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                        color: myColor,
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Center(
+                                      child: Text(
+                                        "Пройти",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Widget _indicator(bool isActive) {
+    return Expanded(
+      child: Container(
+        height: 4,
+        margin: EdgeInsets.only(right: 5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            color: isActive ? Colors.grey[800] : Colors.white),
+      ),
+    );
+  }
+
+  List<Widget> _buildIndicator() {
+    List<Widget> indicators = [];
+    for (int i = 0; i < products.length; i++) {
+      if (currentIndex == i) {
+        indicators.add(_indicator(true));
+      } else {
+        indicators.add(_indicator(false));
+      }
+    }
+
+    return indicators;
   }
 }
