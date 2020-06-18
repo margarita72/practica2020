@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobilepr2020/Animation/FadeAnimation.dart';
+import 'package:mobilepr2020/Profiles/anxietylevel.dart';
+import 'package:mobilepr2020/Profiles/individualHealth.dart';
 import 'package:mobilepr2020/customization.dart';
 
 void main() => runApp(MaterialApp(
@@ -13,24 +15,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<List<String>> products = [
+  final List<List> products = [
     [
       'assets/images/my1.jpg',
       'Анкета №1',
       '100 \$',
       'Уровень индивидуального здоровья и факторов риска развития хронических неинфекционных болезней',
+      IndividualHealth(),
     ],
     [
       'assets/images/my4.jpg',
       'Анкета №2',
       '120 \$',
       'Уровень тревожности',
+      Anxietylevel(),
     ],
     [
       'assets/images/my3.jpg',
       'Анкета №3',
       '80 \$',
       'Опросник SF-36 «Качество жизни»',
+      IndividualHealth(),
     ],
   ];
 
@@ -151,7 +156,15 @@ class _HomePageState extends State<HomePage> {
                               child: FadeAnimation(
                                 1.7,
                                 RaisedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            products[currentIndex][4],
+                                      ),
+                                    );
+                                  },
                                   child: Container(
                                       width: MediaQuery.of(context).size.width,
                                       height: 45,
