@@ -149,23 +149,25 @@ class _HomePageState extends State<HomePage> {
                             child: Align(
                               alignment: Alignment.bottomCenter,
                               child: FadeAnimation(
-                                  1.7,
-                                  Container(
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                        color: myColor,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: Center(
-                                      child: Text(
-                                        "Пройти",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          fontSize: 20,
+                                1.7,
+                                RaisedButton(
+                                  onPressed: () {},
+                                  child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 45,
+                                      child: Center(
+                                        child: Text(
+                                          "Пройти",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  )),
+                                      )),
+                                  color: myColor,
+                                ),
+                              ),
                             ),
                           )
                         ],
