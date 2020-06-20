@@ -550,11 +550,57 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
   void resultButton() {
     final form = formKeys.currentState;
     if (form.validate()) {
+      form.save();
+      //Рассчитываем индекс массы
+      double im =
+          double.parse(heft) / (double.parse(growth) * double.parse(growth));
+      String messageIM;
+      if (im <= 16.0) {
+        messageIM = 'Обратите внимание у Вас выраженный дефицит массы тела.';
+      } else if (im > 16 && im <= 18.5) {
+        messageIM = '«Обратите внимание у Вас недостаточная масса тела.';
+      } else if (im > 18.5 && im <= 24.99) {
+        messageIM = 'У Вас нормальный уровень ИМТ.';
+      } else if (im > 24.99 && im <= 30) {
+        messageIM = 'Обратите внимание у Вас избыточная масса тела.';
+      } else if (im > 30 && im <= 35) {
+        messageIM =
+            'Обратите внимание у Вас высокий уровень ИМТ. Ожирение 1 степени.';
+      } else if (im > 35 && im <= 40) {
+        messageIM =
+            'Обратите внимание у Вас высокий уровень ИМТ. Ожирение 2 степени.';
+      } else if (im > 40) {
+        messageIM =
+            'Обратите внимание у Вас высокий уровень ИМТ. Ожирение 2 степени.';
+      }
+      if (messageIM == null) {
+        messageIM = '';
+      }
+
+      //теперь про холлестерин
+      double chl = double.parse(cholesterol);
+      String messageChl;
+      if (chl <= 5.2) {
+        messageChl = 'У Вас оптимальный уровень холестерина';
+      } else if (chl > 5.2 && chl <= 6.2) {
+        messageChl =
+            'Обратите внимание у Вас максимально допустимый уровень холестерина';
+      } else if (chl > 6.2) {
+        messageChl = 'Обратите внимание у Вас высокий уровень холестерина';
+      }
+
+      if (messageChl == null) {
+        messageChl = '';
+      }
+      var massage = messageIM + " " + messageChl;
       //отправимся на новую форму
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ResultAnimation(),
+          builder: (context) => ResultAnimation(
+            massage: massage,
+            img: 'assets/images/my1.jpg',
+          ),
         ),
       );
     }
