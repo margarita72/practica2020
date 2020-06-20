@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilepr2020/Result/result.dart';
 import 'package:mobilepr2020/customization.dart';
 
 class IndividualHealth extends StatelessWidget {
@@ -84,7 +85,14 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
 
   //переменные для формы
   String placeOfWork;
+  String profession;
+  String locality;
   String radioItemFloor;
+  String age;
+  String arterialPressure;
+  String cholesterol;
+  String growth;
+  String heft;
   final formKeys = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -170,7 +178,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => profession = val,
                     validator: (val) => val.length < 3
                         ? "Слишком короткое наименование провессии"
                         : null,
@@ -212,7 +220,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => locality = val,
                     validator: (val) => val.length < 5
                         ? "Слишком короткое наименование населенного пункта"
                         : null,
@@ -261,7 +269,9 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                             title: Text(
                               "Мужской",
                               style: TextStyle(
-                                color: radioItemFloor == 'M' ? myColor : Colors.grey[500],
+                                color: radioItemFloor == 'M'
+                                    ? myColor
+                                    : Colors.grey[500],
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -284,7 +294,9 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                             title: Text(
                               "Женский",
                               style: TextStyle(
-                                color: radioItemFloor == 'Ж' ? myColor : Colors.grey[500],
+                                color: radioItemFloor == 'Ж'
+                                    ? myColor
+                                    : Colors.grey[500],
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -334,7 +346,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => age = val,
                     validator: (val) =>
                         val.length < 1 ? "Слишком короткий возраст" : null,
                   ),
@@ -374,7 +386,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => arterialPressure = val,
                     validator: (val) => val.length < 2
                         ? "Слишком короткий уровень артериального давления"
                         : null,
@@ -414,7 +426,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => cholesterol = val,
                     validator: (val) => val.length < 2
                         ? "Слишком короткий уровень холлестерина"
                         : null,
@@ -455,7 +467,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => growth = val,
                     validator: (val) =>
                         val.length < 2 ? "Слишком короткий рост" : null,
                   ),
@@ -470,7 +482,6 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     top: 10.0,
                   ),
                   child: TextFormField(
-                    
                     keyboardType: TextInputType.number,
                     cursorColor: myColor,
                     decoration: InputDecoration(
@@ -496,7 +507,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                     ),
                     minLines: 1,
                     style: _sizeTextBlack,
-                    onSaved: (val) => placeOfWork = val,
+                    onSaved: (val) => heft = val,
                     validator: (val) =>
                         val.length < 1 ? "Слишком короткий вес" : null,
                   ),
@@ -509,7 +520,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                   height: 45.0,
                   child: RaisedButton(
                     color: myColor,
-                    onPressed: () {},
+                    onPressed: resultButton,
                     textColor: Colors.white,
                     shape: StadiumBorder(),
                     child: Container(
@@ -533,5 +544,19 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
         ),
       ]),
     );
+  }
+
+  //обработчик формы
+  void resultButton() {
+    final form = formKeys.currentState;
+    if (form.validate()) {
+      //отправимся на новую форму
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultAnimation(),
+        ),
+      );
+    }
   }
 }
