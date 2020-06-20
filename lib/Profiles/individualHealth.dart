@@ -261,7 +261,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                             title: Text(
                               "Мужской",
                               style: TextStyle(
-                                color: Colors.grey[500],
+                                color: radioItemFloor == 'M' ? myColor : Colors.grey[500],
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -284,7 +284,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                             title: Text(
                               "Женский",
                               style: TextStyle(
-                                color: Colors.grey[500],
+                                color: radioItemFloor == 'Ж' ? myColor : Colors.grey[500],
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -409,7 +409,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                       ),
                       //filled: true,
 
-                      labelText: "Уровень холестерина",
+                      labelText: "Уровень холестерина (ммоль/л)",
                       labelStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
                     ),
                     minLines: 1,
@@ -450,7 +450,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                       ),
                       //filled: true,
 
-                      labelText: "Рост",
+                      labelText: "Рост (м.)",
                       labelStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
                     ),
                     minLines: 1,
@@ -491,7 +491,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
                       ),
                       //filled: true,
 
-                      labelText: "Вес",
+                      labelText: "Вес (кг.)",
                       labelStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
                     ),
                     minLines: 1,
