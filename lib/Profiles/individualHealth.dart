@@ -52,7 +52,6 @@ class IndividualHealth extends StatelessWidget {
                     ),
                     */
                     Image.asset('assets/images/my17.jpg', fit: BoxFit.cover),
-                    Text("data")
                   ],
                 ),
               ),
