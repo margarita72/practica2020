@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobilepr2020/Animation/FadeAnimation.dart';
 import 'package:mobilepr2020/Profiles/anxietylevel.dart';
 import 'package:mobilepr2020/Profiles/individualHealth.dart';
+import 'package:mobilepr2020/Profiles/sf36.dart';
 import 'package:mobilepr2020/customization.dart';
 
 void main() => runApp(MaterialApp(
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       'Анкета №3',
       '80 \$',
       'Опросник SF-36 «Качество жизни»',
-      IndividualHealth(),
+      Sf36(),
     ],
   ];
 
