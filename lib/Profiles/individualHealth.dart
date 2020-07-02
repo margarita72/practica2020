@@ -51,7 +51,7 @@ class IndividualHealth extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     */
-                    Image.asset('assets/images/my17.jpg', fit: BoxFit.cover),
+                    Image.asset('assets/images/my2.jpeg', fit: BoxFit.cover),
                   ],
                 ),
               ),
@@ -598,7 +598,7 @@ class MyProfileOneSliverLists extends State<MyProfileOneSliverList> {
         MaterialPageRoute(
           builder: (context) => ResultAnimation(
             massage: massage,
-            img: 'assets/images/my1.jpg',
+            img: 'assets/images/my2.jpeg',
           ),
         ),
       );

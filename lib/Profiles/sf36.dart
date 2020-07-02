@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilepr2020/Result/result.dart';
 import 'package:mobilepr2020/customization.dart';
 
 class Sf36 extends StatelessWidget {
@@ -69,59 +70,78 @@ class MyProfileThreeSliverList extends StatefulWidget {
 
 class MyProfileThreeSliverLists extends State<MyProfileThreeSliverList> {
   final formKeys = GlobalKey<FormState>();
-  int healthStatus; //состояние здоровья
-  int healthStatusTwoo; //состояние здоровья
-  int healthRestrictionThreeA; //а
-  int healthRestrictionThreeB; //б
-  int healthRestrictionThreeC; //в
-  int healthRestrictionThreeD; //г
-  int healthRestrictionThreeE; //д
-  int healthRestrictionThreeF; //е
-  int healthRestrictionThreeG; //ж
-  int healthRestrictionThreeH; //з
-  int healthRestrictionThreeI; //и
-  int healthRestrictionThreeJ; //к
+  int healthStatus = 0; //состояние здоровья
+  int healthStatusTwoo = 0; //состояние здоровья
+  int healthRestrictionThreeA = 0; //а
+  int healthRestrictionThreeB = 0; //б
+  int healthRestrictionThreeC = 0; //в
+  int healthRestrictionThreeD = 0; //г
+  int healthRestrictionThreeE = 0; //д
+  int healthRestrictionThreeF = 0; //е
+  int healthRestrictionThreeG = 0; //ж
+  int healthRestrictionThreeH = 0; //з
+  int healthRestrictionThreeI = 0; //и
+  int healthRestrictionThreeJ = 0; //к
 
   //физическое состояние 4 недели
-  int physicalCondition4WeeksA;
-  int physicalCondition4WeeksB;
-  int physicalCondition4WeeksC;
-  int physicalCondition4WeeksD;
+  int physicalCondition4WeeksA = 0;
+  int physicalCondition4WeeksB = 0;
+  int physicalCondition4WeeksC = 0;
+  int physicalCondition4WeeksD = 0;
 
   //work difficulties 4 weeks
-  int workDifficulties4WeeksA;
-  int workDifficulties4WeeksB;
-  int workDifficulties4WeeksC;
+  int workDifficulties4WeeksA = 0;
+  int workDifficulties4WeeksB = 0;
+  int workDifficulties4WeeksC = 0;
 
   //family time 4 weeks
-  int familyTime4Weeks;
+  int familyTime4Weeks = 0;
 
   //physical pain 4 weeks
-  int physicalPain4Weeks;
+  int physicalPain4Weeks = 0;
 
   //normal work 4 weeks
-  int normalWork4Weeks;
+  int normalWork4Weeks = 0;
 
   //FOUR weeks
-  int fourWeeksA;
-  int fourWeeksB;
-  int fourWeeksC;
-  int fourWeeksD;
-  int fourWeeksE;
-  int fourWeeksF;
-  int fourWeeksG;
-  int fourWeeksH;
-  int fourWeeksI;
+  int fourWeeksA = 0;
+  int fourWeeksB = 0;
+  int fourWeeksC = 0;
+  int fourWeeksD = 0;
+  int fourWeeksE = 0;
+  int fourWeeksF = 0;
+  int fourWeeksG = 0;
+  int fourWeeksH = 0;
+  int fourWeeksI = 0;
 
   //active communication with people
-  int activeCommunicationWithPeople;
+  int activeCommunicationWithPeople = 0;
 
   //statement
-  int statementA;
-  int statementB;
-  int statementC;
-  int statementD;
+  int statementA = 0;
+  int statementB = 0;
+  int statementC = 0;
+  int statementD = 0;
 
+  //переменные для подсчета итогов
+  double pf3 = 0.0;
+  double pr4 = 0.0;
+  double bp7 = 0.0;
+  double bp8 = 0.0;
+  double br78 = 0.0;
+  double gh11 = 0.0;
+  double vt91 = 0.0;
+  double sf610 = 0.0;
+  double re5 = 0.0;
+  double mh92 = 0.0;
+
+  double sumGH = 0.0;
+  int sumPr = 0;
+
+  double sumPH = 0.0;
+  double ph = 0.0;
+
+  String message = "";
   @override
   Widget build(BuildContext context) {
     return SliverList(
@@ -131,7 +151,7 @@ class MyProfileThreeSliverLists extends State<MyProfileThreeSliverList> {
             key: formKeys,
             child: Column(
               children: <Widget>[
-                Text("xsds"),
+                
                 //оценка здоровья
                 Container(
                   height: 160.0,
@@ -4779,5 +4799,298 @@ class MyProfileThreeSliverLists extends State<MyProfileThreeSliverList> {
     );
   }
 
-  void resultButton() {}
+  void resultButton() {
+    //PFsum = 3a + 3б + 3в + 3г + 3д + 3е + 3ж + 3з + 3и + 3к
+    int sumPF = healthRestrictionThreeA +
+        healthRestrictionThreeB +
+        healthRestrictionThreeC +
+        healthRestrictionThreeD +
+        healthRestrictionThreeE +
+        healthRestrictionThreeF +
+        healthRestrictionThreeG +
+        healthRestrictionThreeH +
+        healthRestrictionThreeI +
+        healthRestrictionThreeJ;
+
+    //PF = ( (PFsum – 10)/ 20)  100
+    pf3 = ((sumPF.toDouble() - 10) / 20) * 100;
+
+    //RPsum = 4а + 4б + 4в + 4г
+
+    sumPr = physicalCondition4WeeksA +
+        physicalCondition4WeeksB +
+        physicalCondition4WeeksC +
+        physicalCondition4WeeksD;
+
+    //RP = ((RPsum – 4)/ 4)  100
+
+    pr4 = ((sumPr - 4) / 4) * 100;
+
+    //«Интенсивность боли (Bodily pain - BP)»:
+
+    //дан ответ на 7 и 8 вопрос\
+    if (physicalPain4Weeks != 0 && normalWork4Weeks != 0) {
+      //перебираем балы за 7 вопрос
+      switch (physicalPain4Weeks) {
+        case 1:
+          myBR7(6.0);
+          break;
+        case 2:
+          myBR7(5.4);
+          break;
+        case 3:
+          myBR7(4.2);
+          break;
+        case 4:
+          myBR7(3.1);
+          break;
+        case 5:
+          myBR7(2.2);
+          break;
+        case 6:
+          myBR7(1.0);
+          break;
+      }
+
+      //переберем баллы за 8 вопрос
+
+      switch (normalWork4Weeks) {
+        case 1:
+          {
+            if (bp7 == 1.0) {
+              myBR8(6.0);
+            } else if (bp7 >= 2 && bp7 <= 6) {
+              myBR8(5.0);
+            }
+
+            break;
+          }
+
+        case 2:
+          myBR8(4.0);
+          break;
+        case 3:
+          myBR8(3.0);
+          break;
+        case 4:
+          myBR8(2.0);
+          break;
+        case 5:
+          myBR8(1.0);
+          break;
+        case 6:
+          myBR8(1.0);
+          break;
+      }
+    }
+    //дан ответ на вопрос №7 и пропущен ответ на вопрос №8
+    else if (physicalPain4Weeks != 0 && normalWork4Weeks == 0) {
+      switch (physicalPain4Weeks) {
+        case 1:
+          myBR7(6.0);
+          myBR8(6.0);
+          break;
+        case 2:
+          myBR7(5.4);
+          myBR8(5.4);
+          break;
+        case 3:
+          myBR7(4.2);
+          myBR8(4.2);
+          break;
+        case 4:
+          myBR7(3.1);
+          myBR8(3.1);
+          break;
+        case 5:
+          myBR7(2.2);
+          myBR8(2.2);
+          break;
+        case 6:
+          myBR7(0.0);
+          myBR8(0.0);
+          break;
+      }
+    }
+
+    //Если дан ответ на вопрос №8 и пропущен ответ на вопрос №7
+    else if (physicalPain4Weeks == 0 && normalWork4Weeks != 0) {
+      switch (normalWork4Weeks) {
+        case 1:
+          myBR8(6.0);
+          myBR7(6.0);
+          break;
+
+        case 2:
+          myBR8(4.75);
+          myBR7(4.75);
+          break;
+        case 3:
+          myBR8(3.5);
+          myBR7(3.5);
+          break;
+        case 4:
+          myBR8(2.25);
+          myBR7(2.25);
+          break;
+        case 5:
+          myBR8(1.0);
+          myBR7(1.0);
+          break;
+        case 6:
+          myBR8(0.0);
+          myBR7(0.0);
+          break;
+      }
+    }
+
+    //BP = [((7” + 8”) – 2)/ 10]  100
+    br78 = (((bp7 + bp8) - 2) / 10) * 100;
+
+    //GHsum = 1 + 11а + 11б + 11в + 11г
+    sumGH = 1.0 + statementA + statementB + statementC + statementD;
+
+    //GH = ((GHsum – 5)/ 20)  100
+
+    gh11 = ((sumGH - 5) / 20) * 100;
+
+    //VTsum = 9а + 9д + 9ж + 9и
+    int sumTV = fourWeeksA + fourWeeksE + fourWeeksG + fourWeeksI;
+
+    //VT = ((VTsum – 4)/ 20)  100
+    vt91 = ((sumTV - 4) / 20) * 100;
+
+    //SFsum = 6 + 10
+    int sumSF610 = familyTime4Weeks + activeCommunicationWithPeople;
+
+    //SF = ((SFsum – 2)/ 8)  100
+
+    sf610 = ((sumSF610 - 2) / 8) * 100;
+
+    //REsum = 5а + 5б + 5в
+
+    int sumRE = physicalCondition4WeeksA +
+        physicalCondition4WeeksB +
+        physicalCondition4WeeksC +
+        physicalCondition4WeeksD;
+
+    //RE = ((REsum – 3)/ 3)  100
+    re5 = ((sumRE - 3) / 3) * 100;
+
+    //MHsum = 9б + 9в + 9г + 9е + 9з
+    int sumMH = fourWeeksB + fourWeeksC + fourWeeksD + fourWeeksF + fourWeeksH;
+
+    //MH = ((MHsum – 5)/ 25)  100
+
+    mh92 = ((sumMH - 5) / 25) * 100;
+
+    double pf3z = (pf3 - 84.52404) / 22.89490;
+    double pr4z = (pr4 - 81.19907) / 33.797290;
+    double br78z = (br78 - 75.49196) / 23.558790;
+    double gh11z = (gh11 - 72.21316) / 20.16964;
+    double vt91z = (vt91 - 61.05453) / 20.86942;
+    double sf610z = (sf610 - 83.59753) / 22.37642;
+    double re5z = (re5 - 81.29467) / 33.02717;
+    double mh92z = (mh92 - 74.84212) / 18.01189;
+
+    //PHsum = (PF-Z  0,42402) + (RP-Z  0,35119) + (BP-Z  0,31754) + (SF -Z  - 0,00753) + (MH-Z  -0,22069) + (RE-Z  -0,19206) + (VT-Z  0,02877) + (GH-Z  0,24954)
+    sumPH = (pf3z * 0.42402) +
+        (pr4z * 0.35119) +
+        (br78z * 0.31754) +
+        (sf610z * -0.00753) +
+        (mh92z * -0.22069) +
+        (re5z * -0.19206) +
+        (vt91z * 0.02877) +
+        (gh11z * 0.24954);
+
+    //PH = (PHsum  10) + 50
+    ph = (sumPH * 10) + 50;
+
+    if (pf3z <= 50) {
+      message +=
+          "Физическое состояние ограничивает выполнение физических нагрузок (самообслуживание, ходьба, подъем по лестнице, переноска тяжестей и т.п.).";
+    } else if (pf3z > 50) {
+      message +=
+          "Физическое состояние не ограничивает выполнение физических нагрузок (самообслуживание, ходьба, подъем по лестнице, переноска тяжестей и т.п.)";
+    }
+
+    if (pr4 <= 50) {
+      message +=
+          "Повседневная деятельность (работа, выполнение будничных обязанностей) ограничена физическим состоянием личности";
+    } else if (pr4 > 50) {
+      message +=
+          "Повседневная деятельность (работа, выполнение будничных обязанностей) не ограничена физическим состоянием личности";
+    }
+
+    if (br78 <= 50) {
+      message +=
+          "Интенсивность боли и ее влияние на способность заниматься повседневной деятельностью, включая работу по дому и вне дома – ограничивает активность личности";
+    } else {
+      message +=
+          "Интенсивность боли и ее влияние на способность заниматься повседневной деятельностью, включая работу по дому и вне дома не ограничивает активность личности";
+    }
+
+    if (vt91 <= 20) {
+      message +=
+          "Низкая оценка своей жизненной активности -  ощущение себя утомлённым, обессиленным";
+    } else if (vt91 > 20 && vt91 <= 50) {
+      message +=
+          "Пониженная оценка своей жизненной активности -  ощущение себя утомлённым, обессиленным";
+    } else if (vt91 > 50 && vt91 <= 80) {
+      message +=
+          "Повышенная оценка своей жизненной активности - ощущение себя полным сил и энергии";
+    } else if (vt91 > 80) {
+      message +=
+          "Высокая оценка своей жизненной активности - ощущение себя полным сил и энергии";
+    }
+
+    if (sf610 <= 30) {
+      message +=
+          "Тяжелая степень ограничения социальных контактов в связи с ухудшением физического и эмоционального состояния";
+    } else if (sf610 > 30 && sf610 <= 50) {
+      message +=
+          "Легкая степень ограничения социальных контактов в связи с ухудшением физического и эмоционального состояния";
+    } else if (sf610 > 50) {
+      message += "Нет или малозначительное ограничения социальных контактов. ";
+    }
+
+    if (re5z <= 50) {
+      message +=
+          "Эмоциональное состояние затрудняет выполнение работы или другой повседневной деятельности (включая увеличение затрат времени, уменьшение объема выполненной работы, снижение качества ее выполнения и т.п.). ";
+    } else if (re5z > 50) {
+      message +=
+          "Эмоциональное состояние не затрудняет выполнение работы или другой повседневной деятельности (включая увеличение затрат времени, уменьшение объема выполненной работы, снижение качества ее выполнения и т.п.). ";
+    }
+    if (mh92z <= 20) {
+      message +=
+          "Низкая оценка своего психического здоровья, наличие депрессивных, тревожных переживаний, психического неблагополучия, преобладание отрицательных эмоций. ";
+    } else if (mh92z > 20 && mh92z <= 40) {
+      message +=
+          "Пониженная оценка своего психического здоровья, наличие депрессивных, тревожных переживаний, психического неблагополучия, преобладание отрицательных эмоций. ";
+    } else if (mh92z > 40 && mh92z <= 60) {
+      message += "Средняя оценка своего психического здоровья. ";
+    } else if (mh92z > 60) {
+      message +=
+          "Высокая оценка своего психического здоровья, нет наличия депрессивных, тревожных переживаний, психического неблагополучия. ";
+    }
+
+    //выведем резельтаты
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultAnimation(
+            massage: message,
+            img: 'assets/images/my3.jpg',
+          ),
+        ),
+      );
+  }
+
+  void myBR7(double a) {
+    bp7 = a;
+  }
+
+  void myBR8(double a) {
+    bp8 = a;
+  }
 }

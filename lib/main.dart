@@ -18,11 +18,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<List> products = [
     [
-      'assets/images/my1.jpg',
+      'assets/images/my2.jpeg',
       'Анкета №1',
       '100 \$',
       'Уровень индивидуального здоровья и факторов риска развития хронических неинфекционных болезней',
       IndividualHealth(),
+      myColorBlue 
     ],
     [
       'assets/images/my4.jpg',
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
       '120 \$',
       'Уровень тревожности',
       Anxietylevel(),
+      myColor, 
     ],
     [
       'assets/images/my3.jpg',
@@ -37,6 +39,7 @@ class _HomePageState extends State<HomePage> {
       '80 \$',
       'Опросник SF-36 «Качество жизни»',
       Sf36(),
+      myColorGrin,
     ],
   ];
 

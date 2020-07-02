@@ -102,7 +102,8 @@ class MyResults extends State<MyResult> {
               radius: 100,
               backgroundImage: AssetImage(img),
             ),
-            Container(
+
+            /* Container(
               margin: EdgeInsets.only(
                 top: 10,
                 left: 15.0,
@@ -116,6 +117,29 @@ class MyResults extends State<MyResult> {
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
+              ),
+            ),
+            */
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      left: 15.0,
+                      right: 15.0,
+                    ),
+                    child: Text(
+                      massage,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
