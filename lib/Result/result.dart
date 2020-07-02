@@ -121,25 +121,27 @@ class MyResults extends State<MyResult> {
             ),
             */
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
+              child: ListView(
+                children: <Widget>[
+                  Container(
                     margin: EdgeInsets.only(
                       top: 10,
                       left: 15.0,
                       right: 15.0,
                     ),
-                    child: Text(
-                      massage,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
+                    child: Container(
+                      child: Text(
+                        massage,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  );
-                },
+                  )
+                ],
               ),
             ),
           ],
